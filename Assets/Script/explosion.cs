@@ -6,9 +6,15 @@ public class explosion : MonoBehaviour
 {
     public float radius = 5.0F;
     public float power = 10.0F;
-
+    private ParticleSystem explosionParticle;
     void Start()
     {
+        explosionParticle = GetComponentInChildren<ParticleSystem>();   
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        explosionParticle.Play();
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders)
